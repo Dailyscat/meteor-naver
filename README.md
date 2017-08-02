@@ -1,15 +1,5 @@
-meteor-naver
-===============
+# pueding:naver
 
-A OAuth2 wrapper for the Naver API
+이 패키지는 pueding:accounts-naver 패키지를 위한 라이브러리 패키지입니다.
 
-##Installation
-
-* Install accounts-ui pacakge: `meteor add accounts-ui`
-* `meteor add spectrum:naver`
-
-##Usage
-
-Creates a new function `Meteor.loginWithNaver(options, callback)`
-
-This is the backbone of `spectrum:accounts-naver`
+자세한 내용은 [https://github.com/pueding/meteor-accounts-naver](https://github.com/pueding/meteor-accounts-naver) 패키지를 확인해 주세요.
