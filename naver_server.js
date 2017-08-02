@@ -4,12 +4,16 @@ OAuth.registerService('naver', 2, null, function (query) {
 
     var requestAccess = getAccessToken(query);
     var identity = getIdentity(requestAccess);
-    for (var idx in identity) {
-        identity[idx]=identity[idx].length && identity[idx][0] || identity[idx];
-    }
     return {
         serviceData: {
             id: identity.id,
+            nickname: identity.nickname,
+            name: identity.name,
+            email: identity.email,
+            gender: identity.gender,
+            age: identity.age,
+            birthday: identity.birthday,
+            profile_image: identity.profile_image,
             accessToken: requestAccess.access_token
         },
         options: {profile: identity}
@@ -52,13 +56,12 @@ var getIdentity = function (requestAccess) {
     try {
         var authorization = requestAccess.token_type + " " + requestAccess.access_token;
         var response = HTTP.post(
-            "https://apis.naver.com/nidlogin/nid/getUserProfile.xml", {
+            "https://openapi.naver.com/v1/nid/me", {
                 headers: {
                     Authorization: authorization
                 }
             });
-        var content = xml2js.parseStringSync(response.content);
-        return (content && content.data && content.data.response && content.data.response[0]) || {};
+        return (response && response.data && response.data.response && response.data.response ) || {};
     } catch (err) {
         throw _.extend(new Error("Failed to fetch identity from Naver. " + response.content),
             {response: err.response});
